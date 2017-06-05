@@ -1,0 +1,568 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		AF2AF59C1EE476C70052C74A /* HCElasticPullToRefreshConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF2AF5971EE476C70052C74A /* HCElasticPullToRefreshConstants.swift */; };
+		AF2AF59D1EE476C70052C74A /* HCElasticPullToRefreshExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF2AF5981EE476C70052C74A /* HCElasticPullToRefreshExtensions.swift */; };
+		AF2AF59E1EE476C70052C74A /* HCElasticPullToRefreshLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF2AF5991EE476C70052C74A /* HCElasticPullToRefreshLoadingView.swift */; };
+		AF2AF59F1EE476C70052C74A /* HCElasticPullToRefreshLoadingViewCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF2AF59A1EE476C70052C74A /* HCElasticPullToRefreshLoadingViewCircle.swift */; };
+		AF2AF5A01EE476C70052C74A /* HCElasticPullToRefreshView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF2AF59B1EE476C70052C74A /* HCElasticPullToRefreshView.swift */; };
+		AF70A5171EE083EC00FE6292 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF70A5161EE083EC00FE6292 /* AppDelegate.swift */; };
+		AF70A5191EE083EC00FE6292 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF70A5181EE083EC00FE6292 /* ViewController.swift */; };
+		AF70A51C1EE083EC00FE6292 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF70A51A1EE083EC00FE6292 /* Main.storyboard */; };
+		AF70A51E1EE083EC00FE6292 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AF70A51D1EE083EC00FE6292 /* Assets.xcassets */; };
+		AF70A5211EE083EC00FE6292 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF70A51F1EE083EC00FE6292 /* LaunchScreen.storyboard */; };
+		AF70A52C1EE083EC00FE6292 /* HCPullToRefreshTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF70A52B1EE083EC00FE6292 /* HCPullToRefreshTests.swift */; };
+		AF70A5371EE083EC00FE6292 /* HCPullToRefreshUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF70A5361EE083EC00FE6292 /* HCPullToRefreshUITests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		AF70A5281EE083EC00FE6292 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AF70A50B1EE083EC00FE6292 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = AF70A5121EE083EC00FE6292;
+			remoteInfo = HCPullToRefresh;
+		};
+		AF70A5331EE083EC00FE6292 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AF70A50B1EE083EC00FE6292 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = AF70A5121EE083EC00FE6292;
+			remoteInfo = HCPullToRefresh;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		AF2AF5971EE476C70052C74A /* HCElasticPullToRefreshConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HCElasticPullToRefreshConstants.swift; sourceTree = "<group>"; };
+		AF2AF5981EE476C70052C74A /* HCElasticPullToRefreshExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HCElasticPullToRefreshExtensions.swift; sourceTree = "<group>"; };
+		AF2AF5991EE476C70052C74A /* HCElasticPullToRefreshLoadingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HCElasticPullToRefreshLoadingView.swift; sourceTree = "<group>"; };
+		AF2AF59A1EE476C70052C74A /* HCElasticPullToRefreshLoadingViewCircle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HCElasticPullToRefreshLoadingViewCircle.swift; sourceTree = "<group>"; };
+		AF2AF59B1EE476C70052C74A /* HCElasticPullToRefreshView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HCElasticPullToRefreshView.swift; sourceTree = "<group>"; };
+		AF70A5131EE083EC00FE6292 /* HCPullToRefresh.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HCPullToRefresh.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AF70A5161EE083EC00FE6292 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		AF70A5181EE083EC00FE6292 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		AF70A51B1EE083EC00FE6292 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		AF70A51D1EE083EC00FE6292 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		AF70A5201EE083EC00FE6292 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		AF70A5221EE083EC00FE6292 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AF70A5271EE083EC00FE6292 /* HCPullToRefreshTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HCPullToRefreshTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		AF70A52B1EE083EC00FE6292 /* HCPullToRefreshTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCPullToRefreshTests.swift; sourceTree = "<group>"; };
+		AF70A52D1EE083EC00FE6292 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AF70A5321EE083EC00FE6292 /* HCPullToRefreshUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HCPullToRefreshUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		AF70A5361EE083EC00FE6292 /* HCPullToRefreshUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCPullToRefreshUITests.swift; sourceTree = "<group>"; };
+		AF70A5381EE083EC00FE6292 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		AF70A5101EE083EC00FE6292 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AF70A5241EE083EC00FE6292 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AF70A52F1EE083EC00FE6292 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		AF70A50A1EE083EC00FE6292 = {
+			isa = PBXGroup;
+			children = (
+				AF70A5151EE083EC00FE6292 /* HCPullToRefresh */,
+				AF70A52A1EE083EC00FE6292 /* HCPullToRefreshTests */,
+				AF70A5351EE083EC00FE6292 /* HCPullToRefreshUITests */,
+				AF70A5141EE083EC00FE6292 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		AF70A5141EE083EC00FE6292 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				AF70A5131EE083EC00FE6292 /* HCPullToRefresh.app */,
+				AF70A5271EE083EC00FE6292 /* HCPullToRefreshTests.xctest */,
+				AF70A5321EE083EC00FE6292 /* HCPullToRefreshUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		AF70A5151EE083EC00FE6292 /* HCPullToRefresh */ = {
+			isa = PBXGroup;
+			children = (
+				AF70A5441EE0A5C000FE6292 /* Source */,
+				AF70A5161EE083EC00FE6292 /* AppDelegate.swift */,
+				AF70A5181EE083EC00FE6292 /* ViewController.swift */,
+				AF70A51A1EE083EC00FE6292 /* Main.storyboard */,
+				AF70A51D1EE083EC00FE6292 /* Assets.xcassets */,
+				AF70A51F1EE083EC00FE6292 /* LaunchScreen.storyboard */,
+				AF70A5221EE083EC00FE6292 /* Info.plist */,
+			);
+			path = HCPullToRefresh;
+			sourceTree = "<group>";
+		};
+		AF70A52A1EE083EC00FE6292 /* HCPullToRefreshTests */ = {
+			isa = PBXGroup;
+			children = (
+				AF70A52B1EE083EC00FE6292 /* HCPullToRefreshTests.swift */,
+				AF70A52D1EE083EC00FE6292 /* Info.plist */,
+			);
+			path = HCPullToRefreshTests;
+			sourceTree = "<group>";
+		};
+		AF70A5351EE083EC00FE6292 /* HCPullToRefreshUITests */ = {
+			isa = PBXGroup;
+			children = (
+				AF70A5361EE083EC00FE6292 /* HCPullToRefreshUITests.swift */,
+				AF70A5381EE083EC00FE6292 /* Info.plist */,
+			);
+			path = HCPullToRefreshUITests;
+			sourceTree = "<group>";
+		};
+		AF70A5441EE0A5C000FE6292 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				AF2AF5971EE476C70052C74A /* HCElasticPullToRefreshConstants.swift */,
+				AF2AF5981EE476C70052C74A /* HCElasticPullToRefreshExtensions.swift */,
+				AF2AF5991EE476C70052C74A /* HCElasticPullToRefreshLoadingView.swift */,
+				AF2AF59A1EE476C70052C74A /* HCElasticPullToRefreshLoadingViewCircle.swift */,
+				AF2AF59B1EE476C70052C74A /* HCElasticPullToRefreshView.swift */,
+			);
+			path = Source;
+			sourceTree = SOURCE_ROOT;
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		AF70A5121EE083EC00FE6292 /* HCPullToRefresh */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AF70A53B1EE083EC00FE6292 /* Build configuration list for PBXNativeTarget "HCPullToRefresh" */;
+			buildPhases = (
+				AF70A50F1EE083EC00FE6292 /* Sources */,
+				AF70A5101EE083EC00FE6292 /* Frameworks */,
+				AF70A5111EE083EC00FE6292 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = HCPullToRefresh;
+			productName = HCPullToRefresh;
+			productReference = AF70A5131EE083EC00FE6292 /* HCPullToRefresh.app */;
+			productType = "com.apple.product-type.application";
+		};
+		AF70A5261EE083EC00FE6292 /* HCPullToRefreshTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AF70A53E1EE083EC00FE6292 /* Build configuration list for PBXNativeTarget "HCPullToRefreshTests" */;
+			buildPhases = (
+				AF70A5231EE083EC00FE6292 /* Sources */,
+				AF70A5241EE083EC00FE6292 /* Frameworks */,
+				AF70A5251EE083EC00FE6292 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				AF70A5291EE083EC00FE6292 /* PBXTargetDependency */,
+			);
+			name = HCPullToRefreshTests;
+			productName = HCPullToRefreshTests;
+			productReference = AF70A5271EE083EC00FE6292 /* HCPullToRefreshTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		AF70A5311EE083EC00FE6292 /* HCPullToRefreshUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AF70A5411EE083EC00FE6292 /* Build configuration list for PBXNativeTarget "HCPullToRefreshUITests" */;
+			buildPhases = (
+				AF70A52E1EE083EC00FE6292 /* Sources */,
+				AF70A52F1EE083EC00FE6292 /* Frameworks */,
+				AF70A5301EE083EC00FE6292 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				AF70A5341EE083EC00FE6292 /* PBXTargetDependency */,
+			);
+			name = HCPullToRefreshUITests;
+			productName = HCPullToRefreshUITests;
+			productReference = AF70A5321EE083EC00FE6292 /* HCPullToRefreshUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		AF70A50B1EE083EC00FE6292 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0830;
+				LastUpgradeCheck = 0830;
+				ORGANIZATIONNAME = Hacknocraft;
+				TargetAttributes = {
+					AF70A5121EE083EC00FE6292 = {
+						CreatedOnToolsVersion = 8.3.2;
+						DevelopmentTeam = 9S24R7N9D3;
+						ProvisioningStyle = Automatic;
+					};
+					AF70A5261EE083EC00FE6292 = {
+						CreatedOnToolsVersion = 8.3.2;
+						DevelopmentTeam = 9S24R7N9D3;
+						ProvisioningStyle = Automatic;
+						TestTargetID = AF70A5121EE083EC00FE6292;
+					};
+					AF70A5311EE083EC00FE6292 = {
+						CreatedOnToolsVersion = 8.3.2;
+						DevelopmentTeam = 9S24R7N9D3;
+						ProvisioningStyle = Automatic;
+						TestTargetID = AF70A5121EE083EC00FE6292;
+					};
+				};
+			};
+			buildConfigurationList = AF70A50E1EE083EC00FE6292 /* Build configuration list for PBXProject "HCPullToRefresh" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = AF70A50A1EE083EC00FE6292;
+			productRefGroup = AF70A5141EE083EC00FE6292 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				AF70A5121EE083EC00FE6292 /* HCPullToRefresh */,
+				AF70A5261EE083EC00FE6292 /* HCPullToRefreshTests */,
+				AF70A5311EE083EC00FE6292 /* HCPullToRefreshUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		AF70A5111EE083EC00FE6292 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AF70A5211EE083EC00FE6292 /* LaunchScreen.storyboard in Resources */,
+				AF70A51E1EE083EC00FE6292 /* Assets.xcassets in Resources */,
+				AF70A51C1EE083EC00FE6292 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AF70A5251EE083EC00FE6292 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AF70A5301EE083EC00FE6292 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		AF70A50F1EE083EC00FE6292 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AF2AF59D1EE476C70052C74A /* HCElasticPullToRefreshExtensions.swift in Sources */,
+				AF70A5191EE083EC00FE6292 /* ViewController.swift in Sources */,
+				AF70A5171EE083EC00FE6292 /* AppDelegate.swift in Sources */,
+				AF2AF59C1EE476C70052C74A /* HCElasticPullToRefreshConstants.swift in Sources */,
+				AF2AF59F1EE476C70052C74A /* HCElasticPullToRefreshLoadingViewCircle.swift in Sources */,
+				AF2AF5A01EE476C70052C74A /* HCElasticPullToRefreshView.swift in Sources */,
+				AF2AF59E1EE476C70052C74A /* HCElasticPullToRefreshLoadingView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AF70A5231EE083EC00FE6292 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AF70A52C1EE083EC00FE6292 /* HCPullToRefreshTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AF70A52E1EE083EC00FE6292 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AF70A5371EE083EC00FE6292 /* HCPullToRefreshUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		AF70A5291EE083EC00FE6292 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = AF70A5121EE083EC00FE6292 /* HCPullToRefresh */;
+			targetProxy = AF70A5281EE083EC00FE6292 /* PBXContainerItemProxy */;
+		};
+		AF70A5341EE083EC00FE6292 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = AF70A5121EE083EC00FE6292 /* HCPullToRefresh */;
+			targetProxy = AF70A5331EE083EC00FE6292 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		AF70A51A1EE083EC00FE6292 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AF70A51B1EE083EC00FE6292 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		AF70A51F1EE083EC00FE6292 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AF70A5201EE083EC00FE6292 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		AF70A5391EE083EC00FE6292 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		AF70A53A1EE083EC00FE6292 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		AF70A53C1EE083EC00FE6292 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 9S24R7N9D3;
+				INFOPLIST_FILE = HCPullToRefresh/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.hacknocraft.HCPullToRefresh;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		AF70A53D1EE083EC00FE6292 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 9S24R7N9D3;
+				INFOPLIST_FILE = HCPullToRefresh/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.hacknocraft.HCPullToRefresh;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+		AF70A53F1EE083EC00FE6292 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = 9S24R7N9D3;
+				INFOPLIST_FILE = HCPullToRefreshTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.hacknocraft.HCPullToRefreshTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/HCPullToRefresh.app/HCPullToRefresh";
+			};
+			name = Debug;
+		};
+		AF70A5401EE083EC00FE6292 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = 9S24R7N9D3;
+				INFOPLIST_FILE = HCPullToRefreshTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.hacknocraft.HCPullToRefreshTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/HCPullToRefresh.app/HCPullToRefresh";
+			};
+			name = Release;
+		};
+		AF70A5421EE083EC00FE6292 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				DEVELOPMENT_TEAM = 9S24R7N9D3;
+				INFOPLIST_FILE = HCPullToRefreshUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.hacknocraft.HCPullToRefreshUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = HCPullToRefresh;
+			};
+			name = Debug;
+		};
+		AF70A5431EE083EC00FE6292 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				DEVELOPMENT_TEAM = 9S24R7N9D3;
+				INFOPLIST_FILE = HCPullToRefreshUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.hacknocraft.HCPullToRefreshUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = HCPullToRefresh;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		AF70A50E1EE083EC00FE6292 /* Build configuration list for PBXProject "HCPullToRefresh" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AF70A5391EE083EC00FE6292 /* Debug */,
+				AF70A53A1EE083EC00FE6292 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AF70A53B1EE083EC00FE6292 /* Build configuration list for PBXNativeTarget "HCPullToRefresh" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AF70A53C1EE083EC00FE6292 /* Debug */,
+				AF70A53D1EE083EC00FE6292 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AF70A53E1EE083EC00FE6292 /* Build configuration list for PBXNativeTarget "HCPullToRefreshTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AF70A53F1EE083EC00FE6292 /* Debug */,
+				AF70A5401EE083EC00FE6292 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AF70A5411EE083EC00FE6292 /* Build configuration list for PBXNativeTarget "HCPullToRefreshUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AF70A5421EE083EC00FE6292 /* Debug */,
+				AF70A5431EE083EC00FE6292 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = AF70A50B1EE083EC00FE6292 /* Project object */;
+}
