@@ -42,13 +42,22 @@ enum HCElasticPullToRefreshState: Int {
     }
 }
 
+public
+enum HCPullToRefreshPosition: Int {
+    case top
+    case bottom
+}
+
 // MARK: -
 // MARK: HCElasticPullToRefreshView
 
 open class HCElasticPullToRefreshView: UIView {
 
     /// Whether or not to include a wave bouncing animation
-    static open var waveEnabled = false
+    static open var waveEnabled = true
+
+    fileprivate var refreshPosition: HCPullToRefreshPosition
+    fileprivate var minOffset: CGFloat
 
     // MARK: -
     // MARK: Vars
@@ -74,6 +83,7 @@ open class HCElasticPullToRefreshView: UIView {
     }
     
     fileprivate var originalContentInsetTop: CGFloat = 0.0 { didSet { layoutSubviews() } }
+    fileprivate var originalContentInsetBottom: CGFloat = 0.0 { didSet { layoutSubviews() } }
     fileprivate let shapeLayer = CAShapeLayer()
     
     fileprivate var displayLink: CADisplayLink!
@@ -123,7 +133,11 @@ open class HCElasticPullToRefreshView: UIView {
     // MARK: -
     // MARK: Constructors
     
-    init() {
+    init(position: HCPullToRefreshPosition? = nil) {
+        self.refreshPosition = position ?? .top
+        self.minOffset = self.refreshPosition == .top ?
+            HCElasticPullToRefreshConstants.MinOffsetToPullTop :
+            HCElasticPullToRefreshConstants.MinOffsetToPullBottom
         super.init(frame: CGRect.zero)
         
         displayLink = CADisplayLink(target: self, selector: #selector(HCElasticPullToRefreshView.displayLinkTick))
@@ -172,17 +186,16 @@ open class HCElasticPullToRefreshView: UIView {
         if keyPath == HCElasticPullToRefreshConstants.KeyPaths.ContentOffset {
             if let newContentOffset = change?[NSKeyValueChangeKey.newKey], let scrollView = scrollView() {
                 let newContentOffsetY = (newContentOffset as AnyObject).cgPointValue.y
-                if state.isAnyOf([.loading, .animatingToStopped]) && newContentOffsetY < -scrollView.contentInset.top {
-                    scrollView.contentOffset.y = -scrollView.contentInset.top
+                if state.isAnyOf([.loading, .animatingToStopped]) {
+                    if newContentOffsetY < -scrollView.contentInset.top && refreshPosition == .top {
+                        scrollView.contentOffset.y = -scrollView.contentInset.top
+                    } else if newContentOffsetY > scrollView.contentSize.height - scrollView.frame.size.height && refreshPosition == .bottom {
+                        scrollView.contentOffset.y = scrollView.contentSize.height - scrollView.frame.height
+                    }
                 } else {
                     scrollViewDidChangeContentOffset(dragging: scrollView.isDragging)
                 }
                 layoutSubviews()
-            }
-        } else if keyPath == HCElasticPullToRefreshConstants.KeyPaths.ContentInset {
-            if let newContentInset = change?[NSKeyValueChangeKey.newKey] {
-                let newContentInsetTop = (newContentInset as AnyObject).uiEdgeInsetsValue.top
-                originalContentInsetTop = newContentInsetTop
             }
         } else if keyPath == HCElasticPullToRefreshConstants.KeyPaths.Frame {
             layoutSubviews()
@@ -230,46 +243,56 @@ open class HCElasticPullToRefreshView: UIView {
     
     fileprivate func currentHeight() -> CGFloat {
         guard let scrollView = scrollView() else { return 0.0 }
-        return max(-originalContentInsetTop - scrollView.contentOffset.y, 0)
+        if refreshPosition == .top {
+            return max(-originalContentInsetTop - scrollView.contentOffset.y, 0)
+        } else {
+            return max(scrollView.contentOffset.y + scrollView.frame.size.height - scrollView.contentSize.height - originalContentInsetBottom, 0)
+        }
     }
     
     fileprivate func currentWaveHeight() -> CGFloat {
-        return HCElasticPullToRefreshView.waveEnabled ?
+        return HCElasticPullToRefreshView.waveEnabled && refreshPosition == .top ?
         min(bounds.height / 3.0 * 1.6, HCElasticPullToRefreshConstants.WaveMaxHeight) :
         0
     }
     
     fileprivate func currentPath() -> CGPath {
         let width: CGFloat = scrollView()?.bounds.width ?? 0.0
-        
+
         let bezierPath = UIBezierPath()
         let animating = isAnimating()
-        
+
         bezierPath.move(to: CGPoint(x: 0.0, y: 0.0))
         bezierPath.addLine(to: CGPoint(x: 0.0, y: l3ControlPointView.hc_center(animating).y))
         bezierPath.addCurve(to: l1ControlPointView.hc_center(animating), controlPoint1: l3ControlPointView.hc_center(animating), controlPoint2: l2ControlPointView.hc_center(animating))
         bezierPath.addCurve(to: r1ControlPointView.hc_center(animating), controlPoint1: cControlPointView.hc_center(animating), controlPoint2: r1ControlPointView.hc_center(animating))
         bezierPath.addCurve(to: r3ControlPointView.hc_center(animating), controlPoint1: r1ControlPointView.hc_center(animating), controlPoint2: r2ControlPointView.hc_center(animating))
         bezierPath.addLine(to: CGPoint(x: width, y: 0.0))
-        
+
         bezierPath.close()
-        
         return bezierPath.cgPath
     }
     
     fileprivate func scrollViewDidChangeContentOffset(dragging: Bool) {
         let offsetY = actualContentOffsetY()
+
+        guard let scrollView = scrollView() else { return }
         
         if state == .stopped && dragging {
             state = .dragging
         } else if state == .dragging && dragging == false {
-            if offsetY >= HCElasticPullToRefreshConstants.MinOffsetToPull {
+            if (refreshPosition == .top &&
+                offsetY >= minOffset) ||
+                (refreshPosition == .bottom &&
+                scrollView.contentOffset.y + scrollView.frame.size.height - scrollView.contentSize.height >= minOffset) {
                 state = .animatingBounce
             } else {
                 state = .stopped
             }
         } else if state.isAnyOf([.dragging, .stopped]) {
-            let pullProgress: CGFloat = offsetY / HCElasticPullToRefreshConstants.MinOffsetToPull
+            let draggingDistance = refreshPosition == .top ?
+                offsetY : scrollView.contentOffset.y - (scrollView.contentSize.height - scrollView.frame.size.height)
+            let pullProgress: CGFloat = draggingDistance / minOffset
             loadingView?.setPullProgress(pullProgress)
         }
     }
@@ -279,16 +302,27 @@ open class HCElasticPullToRefreshView: UIView {
         
         var contentInset = scrollView.contentInset
         contentInset.top = originalContentInsetTop
+        contentInset.bottom = originalContentInsetBottom
         
         if state == .animatingBounce {
-            contentInset.top += currentHeight()
+            if refreshPosition == .top {
+                contentInset.top += currentHeight()
+            } else {
+                contentInset.bottom += currentHeight()
+            }
         } else if state == .loading {
-            contentInset.top += HCElasticPullToRefreshConstants.LoadingContentInset
+            if refreshPosition == .top {
+                contentInset.top += HCElasticPullToRefreshConstants.LoadingContentInset
+            } else {
+                contentInset.bottom += HCElasticPullToRefreshConstants.LoadingContentInset
+            }
         }
         
         scrollView.hc_removeObserver(self, forKeyPath: HCElasticPullToRefreshConstants.KeyPaths.ContentInset)
         
-        let animationBlock = { scrollView.contentInset = contentInset }
+        let animationBlock = {
+            scrollView.contentInset = contentInset
+        }
         let completionBlock = { () -> Void in
             if shouldAddObserverWhenFinished && self.observing {
                 scrollView.hc_addObserver(self, forKeyPath: HCElasticPullToRefreshConstants.KeyPaths.ContentInset)
@@ -325,13 +359,15 @@ open class HCElasticPullToRefreshView: UIView {
         scrollView.hc_removeObserver(self, forKeyPath: HCElasticPullToRefreshConstants.KeyPaths.ContentInset)
         
         UIView.animate(withDuration: duration, delay: 0.0, usingSpringWithDamping: 0.43, initialSpringVelocity: 0.0, options: [], animations: { [weak self] in
-            self?.cControlPointView.center.y = centerY
-            self?.l1ControlPointView.center.y = centerY
-            self?.l2ControlPointView.center.y = centerY
-            self?.l3ControlPointView.center.y = centerY
-            self?.r1ControlPointView.center.y = centerY
-            self?.r2ControlPointView.center.y = centerY
-            self?.r3ControlPointView.center.y = centerY
+
+            let y = self?.refreshPosition == .top ? centerY : centerY + 100
+            self?.cControlPointView.center.y = y
+            self?.l1ControlPointView.center.y = y
+            self?.l2ControlPointView.center.y = y
+            self?.l3ControlPointView.center.y = y
+            self?.r1ControlPointView.center.y = y
+            self?.r2ControlPointView.center.y = y
+            self?.r3ControlPointView.center.y = y
             }, completion: { [weak self] _ in
                 self?.stopDisplayLink()
                 self?.resetScrollViewContentInset(shouldAddObserverWhenFinished: true, animated: false, completion: nil)
@@ -342,10 +378,17 @@ open class HCElasticPullToRefreshView: UIView {
                 self?.state = .loading
             })
 
-        bounceAnimationHelperView.center = CGPoint(x: 0.0, y: originalContentInsetTop + currentHeight())
+        if refreshPosition == .top {
+            bounceAnimationHelperView.center = CGPoint(x: 0.0, y: originalContentInsetTop + currentHeight())
+        } else {
+            bounceAnimationHelperView.center = CGPoint(x: 0.0, y: scrollView.contentSize.height - currentHeight())
+        }
         UIView.animate(withDuration: duration * 0.4, animations: { [weak self] in
-            if let contentInsetTop = self?.originalContentInsetTop {
+
+            if let contentInsetTop = self?.originalContentInsetTop, self?.refreshPosition == .top {
                 self?.bounceAnimationHelperView.center = CGPoint(x: 0.0, y: contentInsetTop + HCElasticPullToRefreshConstants.LoadingContentInset)
+            } else if self?.refreshPosition == .bottom {
+                self?.bounceAnimationHelperView.center = CGPoint(x: 0.0, y: scrollView.contentSize.height - HCElasticPullToRefreshConstants.LoadingContentInset)
             }
             }, completion: nil)
     }
@@ -364,20 +407,32 @@ open class HCElasticPullToRefreshView: UIView {
     func displayLinkTick() {
         let width = bounds.width
         var height: CGFloat = 0.0
-        
+        guard let scrollView = scrollView() else { return }
+
         if state == .animatingBounce {
-            guard let scrollView = scrollView() else { return }
-        
-            scrollView.contentInset.top = bounceAnimationHelperView.hc_center(isAnimating()).y
-            scrollView.contentOffset.y = -scrollView.contentInset.top
-            
-            height = scrollView.contentInset.top - originalContentInsetTop
-            
-            frame = CGRect(x: 0.0, y: -height - 1.0, width: width, height: height)
+
+            if refreshPosition == .top {
+                scrollView.contentInset.top = bounceAnimationHelperView.hc_center(isAnimating()).y
+                scrollView.contentOffset.y = -scrollView.contentInset.top
+
+                height = scrollView.contentInset.top - originalContentInsetTop
+
+                frame = CGRect(x: 0.0, y: -height - 1.0, width: width, height: height)
+            } else {
+                scrollView.contentInset.bottom = bounceAnimationHelperView.hc_center(isAnimating()).y > 0 ?
+                    scrollView.contentSize.height - bounceAnimationHelperView.hc_center(isAnimating()).y :
+                    0
+                scrollView.contentOffset.y = scrollView.contentSize.height - scrollView.frame.height + scrollView.contentInset.bottom
+
+                height = scrollView.contentInset.bottom - originalContentInsetBottom
+
+                frame = CGRect(x: 0.0, y: scrollView.contentSize.height, width: width, height: height)
+            }
+
         } else if state == .animatingToStopped {
             height = actualContentOffsetY()
         }
-    
+
         shapeLayer.frame = CGRect(x: 0.0, y: 0.0, width: width, height: height)
         shapeLayer.path = currentPath()
         
@@ -405,18 +460,25 @@ open class HCElasticPullToRefreshView: UIView {
         
         if let scrollView = scrollView() , state != .animatingBounce {
             let width = scrollView.bounds.width
+            let contentHeight = scrollView.contentSize.height
             let height = currentHeight()
-            
-            frame = CGRect(x: 0.0, y: -height, width: width, height: height)
+
+            // position of the refresh view depends on where it's added
+            let yPosition = refreshPosition == .top ?
+                -height : contentHeight
+
+            frame = CGRect(x: 0.0, y: yPosition, width: width, height: height)
             
             if state.isAnyOf([.loading, .animatingToStopped]) {
-                cControlPointView.center = CGPoint(x: width / 2.0, y: height)
-                l1ControlPointView.center = CGPoint(x: 0.0, y: height)
-                l2ControlPointView.center = CGPoint(x: 0.0, y: height)
-                l3ControlPointView.center = CGPoint(x: 0.0, y: height)
-                r1ControlPointView.center = CGPoint(x: width, y: height)
-                r2ControlPointView.center = CGPoint(x: width, y: height)
-                r3ControlPointView.center = CGPoint(x: width, y: height)
+
+                let centerY = refreshPosition == .top ? height : 0
+                cControlPointView.center = CGPoint(x: width / 2.0, y: centerY)
+                l1ControlPointView.center = CGPoint(x: 0.0, y: centerY)
+                l2ControlPointView.center = CGPoint(x: 0.0, y: centerY)
+                l3ControlPointView.center = CGPoint(x: 0.0, y: centerY)
+                r1ControlPointView.center = CGPoint(x: width, y: centerY)
+                r2ControlPointView.center = CGPoint(x: width, y: centerY)
+                r3ControlPointView.center = CGPoint(x: width, y: centerY)
             } else {
                 let locationX = scrollView.panGestureRecognizer.location(in: scrollView).x
                 
@@ -428,16 +490,25 @@ open class HCElasticPullToRefreshView: UIView {
                 
                 let leftPartWidth = locationX - minLeftX
                 let rightPartWidth = maxRightX - locationX
+
+                let direction: CGFloat = refreshPosition == .top ? 1 : -1
                 
-                cControlPointView.center = CGPoint(x: locationX , y: baseHeight + waveHeight * 1.36)
-                l1ControlPointView.center = CGPoint(x: minLeftX + leftPartWidth * 0.71, y: baseHeight + waveHeight * 0.64)
-                l2ControlPointView.center = CGPoint(x: minLeftX + leftPartWidth * 0.44, y: baseHeight)
-                l3ControlPointView.center = CGPoint(x: minLeftX, y: baseHeight)
-                r1ControlPointView.center = CGPoint(x: maxRightX - rightPartWidth * 0.71, y: baseHeight + waveHeight * 0.64)
-                r2ControlPointView.center = CGPoint(x: maxRightX - (rightPartWidth * 0.44), y: baseHeight)
-                r3ControlPointView.center = CGPoint(x: maxRightX, y: baseHeight)
+                cControlPointView.center = CGPoint(x: locationX,
+                                                   y: baseHeight + waveHeight * 1.36 * direction)
+                l1ControlPointView.center = CGPoint(x: minLeftX + leftPartWidth * 0.71,
+                                                    y: baseHeight + waveHeight * 0.64 * direction)
+                l2ControlPointView.center = CGPoint(x: minLeftX + leftPartWidth * 0.44,
+                                                    y: baseHeight)
+                l3ControlPointView.center = CGPoint(x: minLeftX,
+                                                    y: baseHeight)
+                r1ControlPointView.center = CGPoint(x: maxRightX - rightPartWidth * 0.71,
+                                                    y: baseHeight + waveHeight * 0.64 * direction)
+                r2ControlPointView.center = CGPoint(x: maxRightX - (rightPartWidth * 0.44),
+                                                    y: baseHeight)
+                r3ControlPointView.center = CGPoint(x: maxRightX,
+                                                    y: baseHeight)
             }
-            
+
             shapeLayer.frame = CGRect(x: 0.0, y: 0.0, width: width, height: height)
             shapeLayer.path = currentPath()
             

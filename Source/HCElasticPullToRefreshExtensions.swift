@@ -83,27 +83,55 @@ public extension UIScrollView {
     // MARK: - Vars
 
     fileprivate struct hc_associatedKeys {
-        static var pullToRefreshView = "pullToRefreshView"
+        static var topPullToRefreshView = "topPullToRefreshView"
+        static var bottomPullToRefreshView = "bottomPullToRefreshView"
     }
 
-    fileprivate var pullToRefreshView: HCElasticPullToRefreshView? {
+    fileprivate var topPullToRefreshView: HCElasticPullToRefreshView? {
         get {
-            return objc_getAssociatedObject(self, &hc_associatedKeys.pullToRefreshView) as? HCElasticPullToRefreshView
+            return objc_getAssociatedObject(self, &hc_associatedKeys.topPullToRefreshView) as? HCElasticPullToRefreshView
         }
 
         set {
-            objc_setAssociatedObject(self, &hc_associatedKeys.pullToRefreshView, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+            objc_setAssociatedObject(self, &hc_associatedKeys.topPullToRefreshView, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+        }
+    }
+
+    fileprivate var bottomPullToRefreshView: HCElasticPullToRefreshView? {
+        get {
+            return objc_getAssociatedObject(self, &hc_associatedKeys.bottomPullToRefreshView) as? HCElasticPullToRefreshView
+        }
+
+        set {
+            objc_setAssociatedObject(self, &hc_associatedKeys.bottomPullToRefreshView, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
     }
     
     // MARK: - Methods (Public)
     
-    public func hc_addPullToRefreshWithActionHandler(_ actionHandler: @escaping () -> Void, loadingView: HCElasticPullToRefreshLoadingView?) {
+    public func bottomEdge() -> CGFloat {
+        return contentOffset.y + frame.size.height + contentInset.bottom + contentInset.top
+    }
+
+    public func hc_addTopPullToRefreshWithActionHandler(_ actionHandler: @escaping () -> Void, loadingView: HCElasticPullToRefreshLoadingView?) {
         isMultipleTouchEnabled = false
         panGestureRecognizer.maximumNumberOfTouches = 1
 
-        let pullToRefreshView = HCElasticPullToRefreshView()
-        self.pullToRefreshView = pullToRefreshView
+        let pullToRefreshView = HCElasticPullToRefreshView(position: .top)
+        self.topPullToRefreshView = pullToRefreshView
+        pullToRefreshView.actionHandler = actionHandler
+        pullToRefreshView.loadingView = loadingView
+        addSubview(pullToRefreshView)
+
+        pullToRefreshView.observing = true
+    }
+
+    public func hc_addBottomPullToRefreshWithActionHandler(_ actionHandler: @escaping () -> Void, loadingView: HCElasticPullToRefreshLoadingView?) {
+        isMultipleTouchEnabled = false
+        panGestureRecognizer.maximumNumberOfTouches = 1
+
+        let pullToRefreshView = HCElasticPullToRefreshView(position: .bottom)
+        self.bottomPullToRefreshView = pullToRefreshView
         pullToRefreshView.actionHandler = actionHandler
         pullToRefreshView.loadingView = loadingView
         addSubview(pullToRefreshView)
@@ -112,21 +140,28 @@ public extension UIScrollView {
     }
     
     public func hc_removePullToRefresh() {
-        pullToRefreshView?.disassociateDisplayLink()
-        pullToRefreshView?.observing = false
-        pullToRefreshView?.removeFromSuperview()
+        topPullToRefreshView?.disassociateDisplayLink()
+        topPullToRefreshView?.observing = false
+        topPullToRefreshView?.removeFromSuperview()
+
+        bottomPullToRefreshView?.disassociateDisplayLink()
+        bottomPullToRefreshView?.observing = false
+        bottomPullToRefreshView?.removeFromSuperview()
     }
     
     public func hc_setPullToRefreshBackgroundColor(_ color: UIColor) {
-        pullToRefreshView?.backgroundColor = color
+        topPullToRefreshView?.backgroundColor = color
+        bottomPullToRefreshView?.backgroundColor = color
     }
     
     public func hc_setPullToRefreshFillColor(_ color: UIColor) {
-        pullToRefreshView?.fillColor = color
+        topPullToRefreshView?.fillColor = color
+        bottomPullToRefreshView?.fillColor = color
     }
     
     public func hc_stopLoading() {
-        pullToRefreshView?.stopLoading()
+        topPullToRefreshView?.stopLoading()
+        bottomPullToRefreshView?.stopLoading()
     }
 }
 
