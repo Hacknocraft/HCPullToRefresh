@@ -30,20 +30,20 @@ import ObjectiveC
 // MARK: (NSObject) Extension
 
 public extension NSObject {
-    
+
     // MARK: -
     // MARK: Vars
-    
+
     fileprivate struct hc_associatedKeys {
         static var observersArray = "observers"
     }
-    
+
     fileprivate var hc_observers: [[String : NSObject]] {
         get {
             if let observers = objc_getAssociatedObject(self, &hc_associatedKeys.observersArray) as? [[String : NSObject]] {
                 return observers
             } else {
-                let observers = [[String : NSObject]]()
+                let observers = [[String: NSObject]]()
                 self.hc_observers = observers
                 return observers
             }
@@ -51,35 +51,35 @@ public extension NSObject {
             objc_setAssociatedObject(self, &hc_associatedKeys.observersArray, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
     }
-    
+
     // MARK: -
     // MARK: Methods
-    
+
     public func hc_addObserver(_ observer: NSObject, forKeyPath keyPath: String) {
-        let observerInfo = [keyPath : observer]
-        
+        let observerInfo = [keyPath: observer]
+
         if hc_observers.index(where: { $0 == observerInfo }) == nil {
             hc_observers.append(observerInfo)
             addObserver(observer, forKeyPath: keyPath, options: .new, context: nil)
         }
     }
-    
+
     public func hc_removeObserver(_ observer: NSObject, forKeyPath keyPath: String) {
-        let observerInfo = [keyPath : observer]
-        
+        let observerInfo = [keyPath: observer]
+
         if let index = hc_observers.index(where: { $0 == observerInfo}) {
             hc_observers.remove(at: index)
             removeObserver(observer, forKeyPath: keyPath)
         }
     }
-    
+
 }
 
 // MARK: -
 // MARK: (UIScrollView) Extension
 
 public extension UIScrollView {
-    
+
     // MARK: - Vars
 
     fileprivate struct hc_associatedKeys {
@@ -106,11 +106,15 @@ public extension UIScrollView {
             objc_setAssociatedObject(self, &hc_associatedKeys.bottomPullToRefreshView, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
     }
-    
+
     // MARK: - Methods (Public)
-    
+
     public func bottomEdge() -> CGFloat {
         return contentOffset.y + frame.size.height + contentInset.bottom + contentInset.top
+    }
+
+    public func hasMoreContentThanHeight() -> Bool {
+        return contentSize.height >= frame.size.height
     }
 
     public func hc_addTopPullToRefreshWithActionHandler(_ actionHandler: @escaping () -> Void, loadingView: HCElasticPullToRefreshLoadingView?) {
@@ -138,7 +142,7 @@ public extension UIScrollView {
 
         pullToRefreshView.observing = true
     }
-    
+
     public func hc_removePullToRefresh() {
         topPullToRefreshView?.disassociateDisplayLink()
         topPullToRefreshView?.observing = false
@@ -148,17 +152,17 @@ public extension UIScrollView {
         bottomPullToRefreshView?.observing = false
         bottomPullToRefreshView?.removeFromSuperview()
     }
-    
+
     public func hc_setPullToRefreshBackgroundColor(_ color: UIColor) {
         topPullToRefreshView?.backgroundColor = color
         bottomPullToRefreshView?.backgroundColor = color
     }
-    
+
     public func hc_setPullToRefreshFillColor(_ color: UIColor) {
         topPullToRefreshView?.fillColor = color
         bottomPullToRefreshView?.fillColor = color
     }
-    
+
     public func hc_stopLoading() {
         topPullToRefreshView?.stopLoading()
         bottomPullToRefreshView?.stopLoading()

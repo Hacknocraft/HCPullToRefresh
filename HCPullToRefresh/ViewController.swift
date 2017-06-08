@@ -36,6 +36,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 self?.tableView.hc_stopLoading()
             })
             }, loadingView: bottomLoadingView)
+        self.tableView.tableFooterView = UIView()
     }
 
     override func didReceiveMemoryWarning() {
@@ -46,7 +47,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     // MARK: - UITableViewDelegate, UITableViewDataSource
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 20
+        return 4
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -57,4 +58,3 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         return tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
     }
 }
-
