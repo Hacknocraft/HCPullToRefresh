@@ -209,7 +209,7 @@ open class HCElasticPullToRefreshView: UIView {
     // MARK: -
     // MARK: Notifications
 
-    func applicationWillEnterForeground() {
+    @objc func applicationWillEnterForeground() {
         if state == .loading {
             layoutSubviews()
         }
@@ -404,7 +404,7 @@ open class HCElasticPullToRefreshView: UIView {
         displayLink.isPaused = true
     }
 
-    func displayLinkTick() {
+    @objc func displayLinkTick() {
         let width = bounds.width
         var height: CGFloat = 0.0
         guard let scrollView = scrollView() else { return }
